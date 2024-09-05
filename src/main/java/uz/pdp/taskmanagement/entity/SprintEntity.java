@@ -17,7 +17,7 @@ import java.util.List;
 @Entity(name = "sprints")
 public class SprintEntity extends BaseEntity {
     private LocalDateTime start;
-    private LocalDateTime end;
+    private LocalDateTime endTime;
     @OneToMany
     private List<TaskEntity> tasks;
     @ManyToOne
