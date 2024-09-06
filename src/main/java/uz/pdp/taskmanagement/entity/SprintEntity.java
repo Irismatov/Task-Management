@@ -1,9 +1,6 @@
 package uz.pdp.taskmanagement.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -16,6 +13,8 @@ import java.util.List;
 @Builder
 @Entity(name = "sprints")
 public class SprintEntity extends BaseEntity {
+
+    @Column(unique = true)
     private LocalDateTime start;
     private LocalDateTime end;
     @OneToMany

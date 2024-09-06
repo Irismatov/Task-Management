@@ -1,4 +1,47 @@
 package uz.pdp.taskmanagement.entity.enumerators;
 
 public enum Permission {
+    USER_CREATE,
+    USER_UPDATE,
+    USER_DELETE,
+    USER_READ,
+    USER_ALL,
+
+    COMPANY_CREATE,
+    COMPANY_UPDATE,
+    COMPANY_DELETE,
+    COMPANY_READ,
+    COMPANY_ALL,
+
+    TASK_CREATE,
+    TASK_UPDATE,
+    TASK_DELETE,
+    TASK_READ,
+    TASK_ALL,
+
+    PRODUCT_CREATE,
+    PRODUCT_UPDATE,
+    PRODUCT_DELETE,
+    PRODUCT_READ,
+    PRODUCT_ALL,
+
+    FEATURE_CREATE,
+    FEATURE_UPDATE,
+    FEATURE_DELETE,
+    FEATURE_READ,
+    FEATURE_ALL,
+
+    TEAM_CREATE,
+    TEAM_UPDATE,
+    TEAM_DELETE,
+    TEAM_READ,
+    TEAM_ALL,
+
+    SPRINT_CREATE,
+    SPRINT_UPDATE,
+    SPRINT_DELETE,
+    SPRINT_READ,
+    SPRINT_ALL,
+
+
 }

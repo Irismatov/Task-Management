@@ -2,7 +2,6 @@ package uz.pdp.taskmanagement.entity;
 
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.time.LocalDate;
