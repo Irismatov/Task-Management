@@ -3,12 +3,11 @@ package uz.pdp.taskmanagement.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.controller.exception.BaseException;
 import uz.pdp.taskmanagement.entity.TeamEntity;
-import uz.pdp.taskmanagement.entity.domain.request.TeamCreateDTO;
-import uz.pdp.taskmanagement.entity.domain.response.TeamResponse;
+import uz.pdp.taskmanagement.domain.request.TeamCreateDTO;
+import uz.pdp.taskmanagement.domain.response.TeamResponse;
 import uz.pdp.taskmanagement.repository.TeamRepository;
 
 import java.util.List;

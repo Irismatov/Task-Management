@@ -1,4 +1,4 @@
-package uz.pdp.taskmanagement.entity.domain.request;
+package uz.pdp.taskmanagement.domain.request;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;

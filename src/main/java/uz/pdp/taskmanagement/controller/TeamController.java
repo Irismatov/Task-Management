@@ -3,8 +3,8 @@ package uz.pdp.taskmanagement.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.taskmanagement.entity.domain.request.TeamCreateDTO;
-import uz.pdp.taskmanagement.entity.domain.response.TeamResponse;
+import uz.pdp.taskmanagement.domain.request.TeamCreateDTO;
+import uz.pdp.taskmanagement.domain.response.TeamResponse;
 import uz.pdp.taskmanagement.service.TeamService;
 
 import java.util.List;

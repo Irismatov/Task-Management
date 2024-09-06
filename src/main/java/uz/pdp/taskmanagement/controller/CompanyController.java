@@ -5,8 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.taskmanagement.domain.request.CompanyCreateDTO;
 import uz.pdp.taskmanagement.domain.view.CompanyInfoView;
-import uz.pdp.taskmanagement.entity.domain.request.SprintCreateDTO;
-import uz.pdp.taskmanagement.entity.domain.response.SprintResponse;
 import uz.pdp.taskmanagement.service.CompanyService;
 
 import java.util.List;
