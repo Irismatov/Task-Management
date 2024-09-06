@@ -44,7 +44,7 @@ public class SprintService {
             existingSprint.setStart(sprintCreateDTO.getStart());
         }
         if (sprintCreateDTO.getEnd() != null) {
-            existingSprint.setEnd(sprintCreateDTO.getEnd());
+            existingSprint.setEndTime(sprintCreateDTO.getEnd());
         }
         sprintRepository.save(existingSprint);
     }
