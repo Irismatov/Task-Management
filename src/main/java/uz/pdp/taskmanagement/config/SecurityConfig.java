@@ -25,6 +25,7 @@ public class SecurityConfig {
                     configurer
                             .requestMatchers(WHITE_LIST).permitAll()
                             .requestMatchers("/user").hasRole("CEO")
+                            .requestMatchers("/features").hasRole("PRODUCT_OWNER")
                             .anyRequest().authenticated();
 
                 })

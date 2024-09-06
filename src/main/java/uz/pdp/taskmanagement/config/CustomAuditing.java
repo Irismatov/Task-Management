@@ -10,7 +10,7 @@ import uz.pdp.taskmanagement.entity.UserEntity;
 import java.util.Optional;
 import java.util.UUID;
 
-@Component(value = "myAuditing")
+@Component
 public class CustomAuditing implements AuditorAware<UUID> {
 
     @Override
