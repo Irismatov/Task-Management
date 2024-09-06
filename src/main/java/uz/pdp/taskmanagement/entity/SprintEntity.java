@@ -16,7 +16,7 @@ public class SprintEntity extends BaseEntity {
 
     @Column(unique = true)
     private LocalDateTime start;
-    private LocalDateTime end;
+    private LocalDateTime endTime;
     @OneToMany
     private List<TaskEntity> tasks;
     @ManyToOne
