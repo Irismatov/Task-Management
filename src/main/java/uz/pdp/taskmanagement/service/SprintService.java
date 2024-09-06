@@ -1,13 +1,12 @@
 package uz.pdp.taskmanagement.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.controller.exception.BaseException;
 import uz.pdp.taskmanagement.entity.SprintEntity;
-import uz.pdp.taskmanagement.entity.domain.request.SprintCreateDTO;
+import uz.pdp.taskmanagement.entity.domain.request.SprintRequest;
 import uz.pdp.taskmanagement.entity.domain.response.SprintResponse;
 import uz.pdp.taskmanagement.entity.domain.response.TeamResponse;
 import uz.pdp.taskmanagement.repository.SprintRepository;
@@ -23,11 +22,11 @@ public class SprintService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public void createSprint(SprintCreateDTO sprintCreateDTO) {
-        if (sprintRepository.existsByStart(sprintCreateDTO.getStart())) {
+    public void createSprint(SprintRequest sprintRequest) {
+        if (sprintRepository.existsByStart(sprintRequest.getStart())) {
             throw new BaseException("This date already exists");
         }
-            SprintEntity sprint = modelMapper.map(sprintCreateDTO, SprintEntity.class);
+            SprintEntity sprint = modelMapper.map(sprintRequest, SprintEntity.class);
             sprintRepository.save(sprint);
 
 
@@ -37,14 +36,14 @@ public class SprintService {
         sprintRepository.deleteById(sprintId);
     }
 
-    public void update(UUID id, SprintCreateDTO sprintCreateDTO) {
+    public void update(UUID id, SprintRequest sprintRequest) {
         SprintEntity existingSprint = findById(id);
 
-        if (sprintCreateDTO.getStart() != null) {
-            existingSprint.setStart(sprintCreateDTO.getStart());
+        if (sprintRequest.getStart() != null) {
+            existingSprint.setStart(sprintRequest.getStart());
         }
-        if (sprintCreateDTO.getEnd() != null) {
-            existingSprint.setEndTime(sprintCreateDTO.getEnd());
+        if (sprintRequest.getEnd() != null) {
+            existingSprint.setEndTime(sprintRequest.getEnd());
         }
         sprintRepository.save(existingSprint);
     }

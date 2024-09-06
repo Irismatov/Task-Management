@@ -9,5 +9,6 @@ import java.util.UUID;
 
 @Repository
 public interface SprintRepository extends JpaRepository<SprintEntity, UUID> {
+
     boolean existsByStart(LocalDateTime startDate);
 }

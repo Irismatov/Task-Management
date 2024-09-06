@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 
-public class TeamCreateDTO {
+public class TeamRequest {
     @Column(unique=true)
     private String name;
     private String description;
