@@ -16,8 +16,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    private UserEntity save(@RequestBody UserRequest user) {
+    @PostMapping("/{role}")
+    private UserEntity save(@RequestBody UserRequest user){
         return userService.save(user);
     }
 
