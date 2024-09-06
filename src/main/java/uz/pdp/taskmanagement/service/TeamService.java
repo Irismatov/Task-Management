@@ -5,8 +5,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.controller.exception.BaseException;
+import uz.pdp.taskmanagement.domain.request.TeamRequest;
 import uz.pdp.taskmanagement.entity.TeamEntity;
-import uz.pdp.taskmanagement.domain.request.TeamCreateDTO;
 import uz.pdp.taskmanagement.domain.response.TeamResponse;
 import uz.pdp.taskmanagement.repository.TeamRepository;
 
@@ -23,8 +23,8 @@ public class TeamService {
     private ModelMapper modelMapper;
 
 
-    public void createTeam(TeamCreateDTO teamCreateDTO) {
-        TeamEntity team = modelMapper.map(teamCreateDTO, TeamEntity.class);
+    public void createTeam(TeamRequest teamRequest) {
+        TeamEntity team = modelMapper.map(teamRequest, TeamEntity.class);
         teamRepository.save(team);
     }
 
@@ -32,14 +32,14 @@ public class TeamService {
         teamRepository.deleteById(teamId);
     }
 
-    public void update(UUID teamId, TeamCreateDTO teamCreateDTO) {
+    public void update(UUID teamId, TeamRequest teamRequest) {
         TeamEntity existingTeam = findById(teamId);
 
-        if (teamCreateDTO.getName() != null) {
-            existingTeam.setName(teamCreateDTO.getName());
+        if (teamRequest.getName() != null) {
+            existingTeam.setName(teamRequest.getName());
         }
-        if (teamCreateDTO.getDescription() != null) {
-            existingTeam.setDescription(teamCreateDTO.getDescription());
+        if (teamRequest.getDescription() != null) {
+            existingTeam.setDescription(teamRequest.getDescription());
         }
         teamRepository.save(existingTeam);
     }

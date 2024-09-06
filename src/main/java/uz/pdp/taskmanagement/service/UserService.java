@@ -55,4 +55,5 @@ public class UserService {
         user.setCompany(company);
         userRepository.save(user);
     }
+
 }

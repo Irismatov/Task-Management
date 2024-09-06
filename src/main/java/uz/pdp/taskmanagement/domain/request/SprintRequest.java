@@ -11,9 +11,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Setter
 @Getter
-public class SprintCreateDTO {
+public class SprintRequest {
     private LocalDateTime start;
-    private LocalDateTime end;
+    private LocalDateTime endTime;
 
     private UUID teamId;
 }
