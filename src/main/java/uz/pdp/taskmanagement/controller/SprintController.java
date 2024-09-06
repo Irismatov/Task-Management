@@ -3,8 +3,8 @@ package uz.pdp.taskmanagement.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.taskmanagement.entity.domain.request.SprintRequest;
-import uz.pdp.taskmanagement.entity.domain.response.SprintResponse;
+import uz.pdp.taskmanagement.domain.request.SprintRequest;
+import uz.pdp.taskmanagement.domain.response.SprintResponse;
 import uz.pdp.taskmanagement.service.SprintService;
 
 import java.util.List;

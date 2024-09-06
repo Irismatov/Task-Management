@@ -42,6 +42,8 @@ public class JwtFilter extends OncePerRequestFilter {
             return;
         }
 
+
+
         String token = authorization.substring(7);
 
         //validate token
