@@ -2,7 +2,6 @@ package uz.pdp.taskmanagement.entity;
 
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -18,4 +17,5 @@ public class CompanyEntity extends BaseEntity{
     private String name;
     private String address;
     private LocalDate establishmentDate;
+    boolean isBlocked;
 }
