@@ -1,15 +1,14 @@
 package uz.pdp.taskmanagement.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.controller.exception.BaseException;
 import uz.pdp.taskmanagement.entity.SprintEntity;
-import uz.pdp.taskmanagement.entity.domain.request.SprintCreateDTO;
-import uz.pdp.taskmanagement.entity.domain.response.SprintResponse;
-import uz.pdp.taskmanagement.entity.domain.response.TeamResponse;
+import uz.pdp.taskmanagement.domain.request.SprintCreateDTO;
+import uz.pdp.taskmanagement.domain.response.SprintResponse;
+import uz.pdp.taskmanagement.domain.response.TeamResponse;
 import uz.pdp.taskmanagement.repository.SprintRepository;
 
 import java.util.List;

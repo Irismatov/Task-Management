@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.domain.request.UserRequest;
+import uz.pdp.taskmanagement.entity.CompanyEntity;
 import uz.pdp.taskmanagement.entity.UserEntity;
 import uz.pdp.taskmanagement.repository.UserRepository;
 
@@ -50,4 +51,8 @@ public class UserService {
         return userRepository.save(update);
     }
 
+    public void updateCeo(CompanyEntity company, UserEntity user) {
+        user.setCompany(company);
+        userRepository.save(user);
+    }
 }

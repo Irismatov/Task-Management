@@ -1,4 +1,4 @@
-package uz.pdp.taskmanagement.entity.domain.response;
+package uz.pdp.taskmanagement.domain.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
