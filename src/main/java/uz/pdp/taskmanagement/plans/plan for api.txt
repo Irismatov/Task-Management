@@ -1,0 +1,23 @@
+I. Project Manager -> 
+	add a company -> 
+1) createCEO -> after create, return response with the ceo's id -> (security update -> ceo only by project manager)
+2) save method updated -> if username(company is null) exists update else save the ceo;
+3) createCompany -> ceoId is returned -> company must be created with ceo (security -> company only by project manager)
+4) read is single page for both company and ceo (url is in companyController) 
+	response => companyiNfo + ceoInfo 
+5) Freeze Company => add companyIsBlocked -> (/freeze-company/{id}) company isBlocked = true 
+						all users users related to the company is 						blocked
+the same logic for /unfreeze-company/{id}
+
+
+
+II. CEO -> 
+1) CRUD for Product owner -> Product may be present or not (security configureation)
+	getFreeProductOwners()
+	getAllProducts() + product owner info + teamInfo
+	update and delete should be modified	
+	
+
+2)CRUD Product -> Product owner may be present or not 
+	getProductsWithoutOwner()
+	update and delete should be modified(in progress cannot be deleted)

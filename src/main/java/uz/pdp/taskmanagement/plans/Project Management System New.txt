@@ -1,0 +1,71 @@
+Project Management
+
+
+Classes:
+
+1. Company -> name, details, ceo (user)
+
+2. Product -> name, gitrepo, owner (user, PO: PRODUCT_OWNER), team (Team), description
+
+3. Team -> name, lead (user, TEAM_LEAD), products (List<Products>), scrumMaster(user, SCRUM_MASTER)
+
+4. User -> name, surname, username, email, password, team (Team), role, permissions, company
+
+5. Feature -> name, description, owner (user, PO), task (List<Task>), status;
+
+6. Task -> name, description, feature (Feature), owner (user), team(Team), status(CR, IN_PR, DONE, ACCEPTED, BLOCKED), sprint, points (1 point = 2 workdays) 
+
+7. Sprint -> start, end, tasks (List<Task>), team
+
+
+
+
+ROLES: PROJECT_ADMINSTRATOR, CEO, HR_ADMIN, PRODUCT_OWNER, SCRUM_MASTER, TEAM_LEAD, DEVELOPER
+
+
+1. PROJECT_ADMINSTRATOR:
+	1. CR Company
+	2. CR CEO
+	3. Freeze Company (shu companydagi hamma tizimga kirolmay qolishi kerak)
+
+2. CEO (Chief executive officer)
+	1. CRUD Product owners/HR_ADMIN
+	2. CURD Product
+	3. See feature progress (Start date, percent of work done)
+
+3. HR_ADMIN:
+	1. CRUD Team (U: update name)
+	2. CRUD employee (DEV, Lead, SCRUM master)
+	
+3. PO
+	1. CRUD Feature
+	2. CRUD Task (assign task, accept task)
+	3. See feature progress (Start date, percent of work done)
+
+4. Team lead:
+	1. CRUD task
+	2. RU sprint (add tasks to sprint)
+
+5. Scrum Master:
+	1. CRUD sprint
+	2. add tasks to sprint
+
+6. DEV:
+	1. R tasks
+	2. U task (update status, description, point)
+ 
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
