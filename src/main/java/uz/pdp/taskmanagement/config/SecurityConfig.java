@@ -12,7 +12,7 @@ import uz.pdp.taskmanagement.filter.JwtFilter;
 
 @Configuration
 public class SecurityConfig {
-    private final String[] WHITE_LIST = {"/register", "/login", "/"};
+    private final String[] WHITE_LIST = { "/login", "/"};
 
     @Autowired
     private JwtFilter jwtFilter;
@@ -25,10 +25,12 @@ public class SecurityConfig {
                     configurer
                             .requestMatchers(WHITE_LIST).permitAll()
                             .requestMatchers("/user").hasRole("CEO")
+                            .requestMatchers("/user/CEO").hasRole("PROJECT_ADMINISTRATOR")
                             .anyRequest().authenticated();
 
                 })
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
+
     }
 }
