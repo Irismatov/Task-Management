@@ -18,4 +18,5 @@ public class CompanyEntity extends BaseEntity{
     private String address;
     private LocalDate establishmentDate;
     boolean isBlocked;
+    private UserEntity CEO;
 }
