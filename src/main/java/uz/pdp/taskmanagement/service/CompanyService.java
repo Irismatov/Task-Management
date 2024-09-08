@@ -6,12 +6,10 @@ import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.controller.exception.BaseException;
 import uz.pdp.taskmanagement.domain.request.CompanyCreateDTO;
 import uz.pdp.taskmanagement.domain.view.CompanyInfoView;
-import uz.pdp.taskmanagement.domain.view.CompanyInfoViewImpl;
 import uz.pdp.taskmanagement.entity.CompanyEntity;
 import uz.pdp.taskmanagement.entity.UserEntity;
 import uz.pdp.taskmanagement.repository.CompanyRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

@@ -9,6 +9,7 @@ import uz.pdp.taskmanagement.domain.request.ProductRequest;
 import uz.pdp.taskmanagement.domain.response.ProductResponse;
 import uz.pdp.taskmanagement.domain.view.ProductInfoView;
 import uz.pdp.taskmanagement.entity.ProductEntity;
+import uz.pdp.taskmanagement.entity.TeamEntity;
 import uz.pdp.taskmanagement.entity.UserEntity;
 import uz.pdp.taskmanagement.repository.ProductRepository;
 
@@ -31,17 +32,29 @@ public class ProductService {
     @Autowired
     private TeamService teamService;
 
-    public ProductResponse saveProduct(ProductRequest productRequest) {
-        ProductEntity product = modelMapper.map(productRequest, ProductEntity.class);
+    public void saveProduct(ProductRequest productRequest) {
+       // ProductEntity product = modelMapper.map(productRequest, ProductEntity.class);
 
-        if (Objects.nonNull(productRequest.getOwner())) {
-            UserEntity owner = userService.findById(productRequest.getOwner());
-            product.setOwner(owner);
-            productRepository.save(product);
-        } else {
-            productRepository.save(product);
-        }
-        return modelMapper.map(product, ProductResponse.class);
+        ProductEntity productEntity = ProductEntity.builder()
+                .name(productRequest.getName())
+                .gitRepo(productRequest.getGitRepo())
+                .description(productRequest.getDescription())
+                .owner(userService.findById(productRequest.getOwner()))
+                .team(teamService.findById(productRequest.getTeam()))
+                .build();
+        productRepository.save(productEntity);
+//        if (Objects.nonNull(productRequest.getOwner())) {
+//            UserEntity owner = userService.findById(productRequest.getOwner());
+//            product.setOwner(owner);
+//
+//            TeamEntity team = teamService.findById(productRequest.getTeam());
+//            product.setTeam(team);
+//
+//            productRepository.save(product);
+//        } else {
+//            productRepository.save(product);
+//        }
+
     }
 
 
@@ -71,7 +84,12 @@ public class ProductService {
     }
 
     public void deleteProduct(UUID id) {
-        productRepository.deleteById(id);
+        ProductEntity product = findById(id);
+        UserEntity owner = product.getOwner();
+
+        product.setOwner(null);
+        userService.updateUser(owner);
+        productRepository.delete(product);
     }
 
     public void updateProduct(UUID id, ProductRequest productRequest) {
