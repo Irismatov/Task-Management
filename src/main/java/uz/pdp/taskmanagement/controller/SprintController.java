@@ -3,8 +3,8 @@ package uz.pdp.taskmanagement.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.taskmanagement.entity.domain.request.SprintCreateDTO;
-import uz.pdp.taskmanagement.entity.domain.response.SprintResponse;
+import uz.pdp.taskmanagement.domain.request.SprintRequest;
+import uz.pdp.taskmanagement.domain.response.SprintResponse;
 import uz.pdp.taskmanagement.service.SprintService;
 
 import java.util.List;
@@ -18,8 +18,8 @@ public class SprintController {
     private SprintService sprintService;
 
     @PostMapping
-    private ResponseEntity<Void> saveSprint(@RequestBody SprintCreateDTO sprintCreateDTO) {
-        sprintService.createSprint(sprintCreateDTO);
+    private ResponseEntity<Void> saveSprint(@RequestBody SprintRequest sprintRequest) {
+        sprintService.createSprint(sprintRequest);
         return ResponseEntity.ok().build();
     }
 
@@ -29,8 +29,8 @@ public class SprintController {
     }
 
     @PutMapping("/id")
-    private ResponseEntity<Void> updateSprint(@RequestParam("id") UUID id, @RequestBody SprintCreateDTO sprintCreateDTO) {
-        sprintService.update(id, sprintCreateDTO);
+    private ResponseEntity<Void> updateSprint(@RequestParam("id") UUID id, @RequestBody SprintRequest sprintRequest) {
+        sprintService.update(id, sprintRequest);
         return ResponseEntity.ok().build();
     }
 

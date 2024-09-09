@@ -1,21 +1,21 @@
-package uz.pdp.taskmanagement.entity.domain.request;
+package uz.pdp.taskmanagement.domain.view;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.UUID;
 
+import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-
-public class TeamCreateDTO {
-    @Column(unique=true)
+public class ProductInfoView {
+    private UUID id;
     private String name;
+    private String gitRepo;
     private String description;
-    private UUID leadId;
-    private UUID scrumMasterId;
+    private UUID ownerId;
+    private UUID  teamId;
 }
+

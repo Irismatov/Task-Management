@@ -3,8 +3,8 @@ package uz.pdp.taskmanagement.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.taskmanagement.entity.domain.request.TeamCreateDTO;
-import uz.pdp.taskmanagement.entity.domain.response.TeamResponse;
+import uz.pdp.taskmanagement.domain.request.TeamRequest;
+import uz.pdp.taskmanagement.domain.response.TeamResponse;
 import uz.pdp.taskmanagement.service.TeamService;
 
 import java.util.List;
@@ -18,8 +18,8 @@ public class TeamController {
     private TeamService teamService;
 
     @PostMapping
-    private ResponseEntity<Void> saveTeam(@RequestBody TeamCreateDTO teamCreateDTO) {
-        teamService.createTeam(teamCreateDTO);
+    private ResponseEntity<Void> saveTeam(@RequestBody TeamRequest teamRequest) {
+        teamService.createTeam(teamRequest);
         return ResponseEntity.ok().build();
     }
 
@@ -37,8 +37,8 @@ public class TeamController {
 
     @PutMapping("/{teamId}")
     private ResponseEntity<Void> updateTeam(@PathVariable("teamId") UUID id,
-                                            @RequestBody TeamCreateDTO teamCreateDTO) {
-        teamService.update(id, teamCreateDTO);
+                                            @RequestBody TeamRequest teamRequest) {
+        teamService.update(id, teamRequest);
         return ResponseEntity.ok().build();
     }
 
