@@ -13,8 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class CompanyCreateDTO {
-    private UUID CeoId;
-
+    private UUID ceoId;
     private String name;
     private String address;
     private LocalDate establishmentDate;
