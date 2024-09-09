@@ -51,6 +51,7 @@ public class UserService {
         return userRepository.save(update);
     }
 
+
     public void updateCeo(CompanyEntity company, UserEntity user) {
         user.setCompany(company);
         userRepository.save(user);

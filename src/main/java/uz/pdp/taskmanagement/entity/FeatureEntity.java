@@ -1,9 +1,7 @@
 package uz.pdp.taskmanagement.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import uz.pdp.taskmanagement.entity.enumerators.FeatureStatus;
 
@@ -20,6 +18,8 @@ public class FeatureEntity extends BaseEntity {
     private String description;
     @ManyToOne // product owner bo'lishi kerak owner
     private UserEntity owner;
+
+    @Enumerated(EnumType.STRING)
     private FeatureStatus status;
     @OneToMany
     private List<TaskEntity> tasks;

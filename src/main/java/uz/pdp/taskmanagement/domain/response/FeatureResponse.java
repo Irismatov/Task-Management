@@ -1,7 +1,5 @@
-package uz.pdp.taskmanagement.entity;
+package uz.pdp.taskmanagement.domain.response;
 
-
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,26 +8,24 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import uz.pdp.taskmanagement.entity.enumerators.FeatureStatus;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
-public abstract class BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    protected UUID id;
-    @CreationTimestamp
+public class FeatureResponse {
+    private UUID id;
+    private String name;
+    private String description;
+    private String owner;
+    private FeatureStatus status;
+    private String tasks;
     private LocalDateTime createdAt;
-    @UpdateTimestamp
     private LocalDateTime updatedAt;
-    @CreatedBy
     private UUID createdBy;
-    @LastModifiedBy
     private UUID updatedBy;
 }
