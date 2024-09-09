@@ -29,9 +29,15 @@ public class CompanyController {
         return companyService.findAll();
     }
 
-    @PutMapping("/id")
-    private ResponseEntity<Void> blockAndUnBlock(@RequestParam("id") UUID id,@RequestBody boolean block) {
-        companyService.blockAndUnBlock(id, block);
+    @PutMapping("/{id}/block")
+    private ResponseEntity<String> block(@PathVariable("id") UUID id) {
+        companyService.blockAndUnBlock(id, true);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}/unblock")
+    private ResponseEntity<String> unblock(@PathVariable("id") UUID id) {
+        companyService.blockAndUnBlock(id, false);
         return ResponseEntity.ok().build();
     }
 
