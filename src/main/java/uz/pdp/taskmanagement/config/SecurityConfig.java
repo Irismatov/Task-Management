@@ -12,7 +12,7 @@ import uz.pdp.taskmanagement.filter.JwtFilter;
 
 @Configuration
 public class SecurityConfig {
-    private final String[] WHITE_LIST = {"/company", "/company/**", "/register", "/login", "/"};
+    private final String[] WHITE_LIST = {"/company", "/company/**", "/register", "/login", "/", "/register-pa"};
 
     @Autowired
     private JwtFilter jwtFilter;
