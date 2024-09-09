@@ -2,6 +2,7 @@ package uz.pdp.taskmanagement.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,9 +27,9 @@ public class AuthController {
         return authService.login(login.getUsername(), login.getPassword());
     }
 
-    @PostMapping("/register")
-    public UserEntity register(@RequestBody UserRequest request) {
-        return userService.save(request);
+    @GetMapping("/register-pa")
+    public void register() {
+        authService.registerPA();
     }
 
 }

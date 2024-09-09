@@ -7,10 +7,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.domain.request.UserRequest;
+import uz.pdp.taskmanagement.domain.response.UserResponse;
 import uz.pdp.taskmanagement.entity.CompanyEntity;
 import uz.pdp.taskmanagement.entity.UserEntity;
+import uz.pdp.taskmanagement.entity.enumerators.UserRole;
 import uz.pdp.taskmanagement.repository.UserRepository;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -61,4 +65,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public List<UserResponse> findByRole(UserRole userRole) {
+        List<UserEntity> byRole = userRepository.findByRole(userRole);
+        return byRole.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
+    }
 }
