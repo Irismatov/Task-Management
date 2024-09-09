@@ -30,6 +30,7 @@ public class SecurityConfig {
 
                             .requestMatchers("/user/CEO").hasRole("PROJECT_ADMINISTRATOR")
                             .requestMatchers("/product/**").hasRole("CEO")
+                            .requestMatchers("/sprint/**").hasRole("CEO")
                             .requestMatchers("/team/**").hasRole("CEO")
 
                             .anyRequest().authenticated();
