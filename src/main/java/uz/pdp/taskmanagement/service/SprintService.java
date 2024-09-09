@@ -9,6 +9,7 @@ import uz.pdp.taskmanagement.domain.request.SprintRequest;
 import uz.pdp.taskmanagement.entity.SprintEntity;
 import uz.pdp.taskmanagement.domain.response.SprintResponse;
 import uz.pdp.taskmanagement.domain.response.TeamResponse;
+import uz.pdp.taskmanagement.entity.TeamEntity;
 import uz.pdp.taskmanagement.repository.SprintRepository;
 
 import java.util.List;
@@ -21,15 +22,17 @@ public class SprintService {
     private SprintRepository sprintRepository;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private TeamService teamService;
 
     public void createSprint(SprintRequest sprintRequest) {
-        if (sprintRepository.existsByStart(sprintRequest.getStart())) {
-            throw new BaseException("This date already exists");
-        }
-            SprintEntity sprint = modelMapper.map(sprintRequest, SprintEntity.class);
-            sprintRepository.save(sprint);
+        SprintEntity entity = SprintEntity.builder()
+                .start(sprintRequest.getStart())
+                .endTime(sprintRequest.getEndTime())
+                .team(teamService.findById(sprintRequest.getTeamId()))
+                .build();
 
-
+        sprintRepository.save(entity);
     }
 
     public void deleteSprint(UUID sprintId) {
