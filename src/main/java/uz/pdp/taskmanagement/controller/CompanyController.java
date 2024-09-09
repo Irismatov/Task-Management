@@ -18,7 +18,7 @@ public class CompanyController {
     private CompanyService companyService;
 
     @PostMapping
-    public ResponseEntity<Void> save(CompanyCreateDTO dto) {
+    public ResponseEntity<Void> save(@RequestBody CompanyCreateDTO dto) {
         companyService.save(dto);
         return ResponseEntity.ok().build();
     }

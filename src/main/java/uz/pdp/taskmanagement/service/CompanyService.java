@@ -32,13 +32,13 @@ public class CompanyService {
                 .CEO(user)
                 .build();
 
-        userService.updateCeo(company, user);
         try{
-            companyRepository.save(company);
+            userService.updateCeo(companyRepository.save(company), user);
         }
         catch (DataIntegrityViolationException e){
             throw new BaseException("Company already exists");
         }
+
     }
 
 
