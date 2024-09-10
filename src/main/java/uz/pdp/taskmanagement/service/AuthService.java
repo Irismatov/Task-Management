@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.domain.JwtResponse;
+import uz.pdp.taskmanagement.domain.response.CompanyResponse;
+import uz.pdp.taskmanagement.entity.CompanyEntity;
 import uz.pdp.taskmanagement.entity.UserEntity;
 import uz.pdp.taskmanagement.entity.enumerators.Permission;
 import uz.pdp.taskmanagement.entity.enumerators.UserRole;

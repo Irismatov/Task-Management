@@ -19,7 +19,7 @@ public class CompanyEntity extends BaseEntity{
     private String name;
     private String address;
     private LocalDate establishmentDate;
-    boolean isBlocked;
+    private Boolean isBlocked;
     @OneToOne
     private UserEntity CEO;
 }

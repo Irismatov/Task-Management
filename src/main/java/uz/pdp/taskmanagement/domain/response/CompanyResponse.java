@@ -13,9 +13,11 @@ import java.util.UUID;
 @Getter
 @Setter
 public class CompanyResponse {
+    private UUID id;
     private UUID ceoId;
     private UUID id;
     private String name;
     private String address;
     private LocalDate establishmentDate;
+    private Boolean isBlocked;
 }
