@@ -67,7 +67,7 @@ public class ProductService {
 
 
     public List<ProductView> getAllProducts() {
-        return productRepository.findAllProducts();
+        return productRepository.getProduct();
     }
 
     public List<ProductView> getAllProductsWithoutOwner() {

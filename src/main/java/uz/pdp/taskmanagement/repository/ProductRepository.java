@@ -19,8 +19,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, UUID> {
 
     @Query("""
         select new uz.pdp.taskmanagement.domain.view.ProductInfoView(
-        p.id, p.name, p.gitRepo, products .description, p.owner.username, p.team.name)
+        p.id, p.name, p.gitRepo, p.description, p.owner.username, p.team.name)
         from products p
 """)
-    List<ProductView> findAllProducts();
+    List<ProductView> getProduct();
 }
