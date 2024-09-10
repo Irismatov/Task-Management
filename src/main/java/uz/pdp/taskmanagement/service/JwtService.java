@@ -2,12 +2,16 @@ package uz.pdp.taskmanagement.service;
 
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
+import uz.pdp.taskmanagement.controller.exception.ExpiredTokenException;
+import uz.pdp.taskmanagement.controller.exception.GlobalExceptionHandler;
 import uz.pdp.taskmanagement.entity.UserEntity;
 
 import java.util.Date;
@@ -19,6 +23,9 @@ public class JwtService {
 
     @Value("${jwt.key}")
     private String key;
+
+    @Autowired
+    GlobalExceptionHandler globalExceptionHandler;
 
     public String generateToken(UserEntity user) {
         return Jwts.builder()
@@ -37,9 +44,13 @@ public class JwtService {
     }
 
     public Jws<Claims> validateToken(String token) {
-        return Jwts.parser()
-                .verifyWith(Keys.hmacShaKeyFor(key.getBytes()))
-                .build()
-                .parseSignedClaims(token);
+        try {
+            return Jwts.parser()
+                    .verifyWith(Keys.hmacShaKeyFor(key.getBytes()))
+                    .build()
+                    .parseSignedClaims(token);
+        } catch (ExpiredJwtException e) {
+            throw new ExpiredTokenException(e.getMessage());
+        }
     }
 }
