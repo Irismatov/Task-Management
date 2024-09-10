@@ -13,12 +13,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import uz.pdp.taskmanagement.controller.exception.ExpiredTokenException;
 import uz.pdp.taskmanagement.service.JwtService;
 import uz.pdp.taskmanagement.service.UserService;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
@@ -47,7 +49,17 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = authorization.substring(7);
 
         //validate token
-        Jws<Claims> claimsJws = jwtService.validateToken(token);
+        Jws<Claims> claimsJws;
+
+        try {
+            claimsJws = jwtService.validateToken(token);
+        } catch (ExpiredTokenException e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"error\" : \" " + e.getMessage() + "\"}");
+            return;
+        }
+
         Claims payload = claimsJws.getPayload();
         List<SimpleGrantedAuthority> authorities = payload.get("authorities", ArrayList.class)
                 .stream()
