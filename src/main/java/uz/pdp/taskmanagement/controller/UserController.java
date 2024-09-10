@@ -54,4 +54,9 @@ public class UserController {
     private List<UserResponse> getScrumMasters() {
         return userService.getAllTeamScrumMasters();
     }
+
+    @GetMapping("/getAllByRoleAndTeamIsNull")
+    private List<UserResponse> getAllByRoleAndTeamIsNull() {
+        return userService.getAllProductOwnersAndProductIsNull();
+    }
 }
