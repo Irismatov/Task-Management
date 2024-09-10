@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.taskmanagement.domain.request.CompanyCreateDTO;
+import uz.pdp.taskmanagement.domain.response.CompanyResponse;
 import uz.pdp.taskmanagement.domain.view.CompanyInfoView;
+import uz.pdp.taskmanagement.domain.view.CompanyInfoViewImpl;
 import uz.pdp.taskmanagement.service.CompanyService;
 
 import java.util.List;
@@ -25,7 +27,7 @@ public class CompanyController {
 
 
     @GetMapping
-    private List<CompanyInfoView> getAllCompany() {
+    private List<CompanyResponse> getAllCompany() {
         return companyService.findAll();
     }
 

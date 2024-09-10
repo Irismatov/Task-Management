@@ -14,7 +14,6 @@ import java.util.List;
 @Entity(name = "sprints")
 public class SprintEntity extends BaseEntity {
 
-    @Column(unique = true)
     private LocalDateTime start;
     private LocalDateTime endTime;
     @OneToMany

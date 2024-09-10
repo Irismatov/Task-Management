@@ -1,15 +1,19 @@
 package uz.pdp.taskmanagement.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.controller.exception.BaseException;
 import uz.pdp.taskmanagement.domain.request.CompanyCreateDTO;
+import uz.pdp.taskmanagement.domain.response.CompanyResponse;
 import uz.pdp.taskmanagement.domain.view.CompanyInfoView;
+import uz.pdp.taskmanagement.domain.view.CompanyInfoViewImpl;
 import uz.pdp.taskmanagement.entity.CompanyEntity;
 import uz.pdp.taskmanagement.entity.UserEntity;
 import uz.pdp.taskmanagement.repository.CompanyRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +25,8 @@ public class CompanyService {
 
     @Autowired
     private CompanyRepository companyRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     public void save(CompanyCreateDTO dto){
         UserEntity user = userService.findById(dto.getCeoId());
@@ -49,8 +55,13 @@ public class CompanyService {
     }
 
 
-    public List<CompanyInfoView> findAll(){
-        return companyRepository.findAllCompanyInfo();
+    public List<CompanyResponse> findAll(){
+        List<CompanyEntity> all = companyRepository.findAll();
+        List<CompanyResponse> views = new ArrayList<>();
+        for (CompanyEntity company : all) {
+            views.add(modelMapper.map(company, CompanyResponse.class));
+        }
+        return views;
     }
 
 

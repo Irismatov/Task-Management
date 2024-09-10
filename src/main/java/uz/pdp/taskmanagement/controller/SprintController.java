@@ -28,14 +28,14 @@ public class SprintController {
         return sprintService.getAll();
     }
 
-    @PutMapping("/id")
-    private ResponseEntity<Void> updateSprint(@RequestParam("id") UUID id, @RequestBody SprintRequest sprintRequest) {
+    @PutMapping("/{id}")
+    private ResponseEntity<Void> updateSprint(@PathVariable("id") UUID id, @RequestBody SprintRequest sprintRequest) {
         sprintService.update(id, sprintRequest);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/id")
-    private ResponseEntity<Void> deleteSprint(@RequestParam("id") UUID id) {
+    @DeleteMapping("/{id}")
+    private ResponseEntity<Void> deleteSprint(@PathVariable("id") UUID id) {
         sprintService.deleteSprint(id);
         return ResponseEntity.ok().build();
     }
