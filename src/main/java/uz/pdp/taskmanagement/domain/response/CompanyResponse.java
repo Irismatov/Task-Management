@@ -1,4 +1,4 @@
-package uz.pdp.taskmanagement.domain.request;
+package uz.pdp.taskmanagement.domain.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CompanyCreateDTO {
+public class CompanyResponse {
     private UUID ceoId;
     private String name;
     private String address;

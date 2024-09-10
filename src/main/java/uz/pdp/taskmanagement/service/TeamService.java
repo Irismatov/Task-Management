@@ -8,6 +8,7 @@ import uz.pdp.taskmanagement.controller.exception.BaseException;
 import uz.pdp.taskmanagement.domain.request.TeamRequest;
 import uz.pdp.taskmanagement.entity.TeamEntity;
 import uz.pdp.taskmanagement.domain.response.TeamResponse;
+import uz.pdp.taskmanagement.entity.UserEntity;
 import uz.pdp.taskmanagement.repository.TeamRepository;
 
 import java.util.List;
@@ -21,14 +22,28 @@ public class TeamService {
 
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private UserService userService;
 
 
     public void createTeam(TeamRequest teamRequest) {
-        TeamEntity team = modelMapper.map(teamRequest, TeamEntity.class);
-        teamRepository.save(team);
+        UserEntity user = userService.findById(teamRequest.getLeadId());
+
+        TeamEntity build = TeamEntity.builder()
+                .name(teamRequest.getName())
+                .description(teamRequest.getDescription())
+                .lead(user)
+                .build();
+
+        user.setTeam(teamRepository.save(build));
+        userService.updateUser(user);
     }
 
     public void deleteTeam(UUID teamId) {
+         UserEntity lead = findById(teamId).getLead();
+        lead.setTeam(null);
+        userService.updateUser(lead);
+
         teamRepository.deleteById(teamId);
     }
 

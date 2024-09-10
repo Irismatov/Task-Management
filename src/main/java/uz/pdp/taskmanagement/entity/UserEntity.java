@@ -29,6 +29,7 @@ public class UserEntity extends BaseEntity {
     private String email;
     private boolean isBlocked;
     @ManyToOne
+    @JoinColumn(name = "team_id")
     private TeamEntity team;
     @ManyToOne
     private CompanyEntity company;

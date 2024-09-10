@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.taskmanagement.domain.request.CompanyCreateDTO;
+import uz.pdp.taskmanagement.domain.response.CompanyResponse;
 import uz.pdp.taskmanagement.domain.view.CompanyInfoView;
+import uz.pdp.taskmanagement.domain.view.CompanyInfoViewImpl;
 import uz.pdp.taskmanagement.service.CompanyService;
 
 import java.util.List;
@@ -18,20 +20,26 @@ public class CompanyController {
     private CompanyService companyService;
 
     @PostMapping
-    public ResponseEntity<Void> save(CompanyCreateDTO dto) {
+    public ResponseEntity<Void> save(@RequestBody CompanyCreateDTO dto) {
         companyService.save(dto);
         return ResponseEntity.ok().build();
     }
 
 
     @GetMapping
-    private List<CompanyInfoView> getAllCompany() {
+    private List<CompanyResponse> getAllCompany() {
         return companyService.findAll();
     }
 
-    @PutMapping("/id")
-    private ResponseEntity<Void> blockAndUnBlock(@RequestParam("id") UUID id,@RequestBody boolean block) {
-        companyService.blockAndUnBlock(id, block);
+    @PutMapping("/{id}/block")
+    private ResponseEntity<String> block(@PathVariable("id") UUID id) {
+        companyService.blockAndUnBlock(id, true);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}/unblock")
+    private ResponseEntity<String> unblock(@PathVariable("id") UUID id) {
+        companyService.blockAndUnBlock(id, false);
         return ResponseEntity.ok().build();
     }
 

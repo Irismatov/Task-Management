@@ -1,6 +1,7 @@
 package uz.pdp.taskmanagement.service;
 
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.repository.ProductRepository;
@@ -12,15 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.controller.exception.BaseException;
 import uz.pdp.taskmanagement.domain.request.ProductRequest;
-import uz.pdp.taskmanagement.domain.response.ProductResponse;
 import uz.pdp.taskmanagement.domain.view.ProductInfoView;
 import uz.pdp.taskmanagement.entity.ProductEntity;
-import uz.pdp.taskmanagement.entity.TeamEntity;
 import uz.pdp.taskmanagement.entity.UserEntity;
 import uz.pdp.taskmanagement.repository.ProductRepository;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 
@@ -92,12 +90,10 @@ public class ProductService {
     }
 
     public void deleteProduct(UUID id) {
-        ProductEntity product = findById(id);
-        UserEntity owner = product.getOwner();
-
-        product.setOwner(null);
-        userService.updateUser(owner);
-        productRepository.delete(product);
+        UserEntity user = findById(id).getOwner();
+        user.setTeam(null);
+        userService.updateUser(user);
+        productRepository.deleteById(id);
     }
 
     public void updateProduct(UUID id, ProductRequest productRequest) {

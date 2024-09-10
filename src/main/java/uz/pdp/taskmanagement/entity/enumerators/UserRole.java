@@ -1,7 +1,10 @@
 package uz.pdp.taskmanagement.entity.enumerators;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public enum UserRole {
     PRODUCT_OWNER(List.of(
             Permission.COMPANY_CREATE,
