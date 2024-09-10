@@ -69,4 +69,19 @@ public class UserService {
         List<UserEntity> byRole = userRepository.findByRole(userRole);
         return byRole.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
     }
+
+    public List<UserResponse> getAllTeamLeads() {
+        List<UserEntity> teamLead = userRepository.getAllByRoleAndTeamIsNull(UserRole.TEAM_LEAD);
+        return  teamLead.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
+    }
+
+
+    public List<UserResponse> getAllTeamScrumMasters() {
+        List<UserEntity> teamLead = userRepository.getAllByRoleAndTeamIsNull(UserRole.SCRUM_MASTER);
+        return  teamLead.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
+    }
+
+
+
+
 }

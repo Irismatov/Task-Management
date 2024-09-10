@@ -14,6 +14,7 @@ import java.util.UUID;
 @Setter
 public class CompanyResponse {
     private UUID ceoId;
+    private UUID id;
     private String name;
     private String address;
     private LocalDate establishmentDate;

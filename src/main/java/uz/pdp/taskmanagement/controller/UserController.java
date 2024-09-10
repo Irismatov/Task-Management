@@ -44,4 +44,14 @@ public class UserController {
         return userService.findByRole(UserRole.CEO);
     }
 
+    @GetMapping("/leads")
+    private List<UserResponse> getLeads() {
+        return userService.getAllTeamLeads();
+    }
+
+
+    @GetMapping("/scrum-master")
+    private List<UserResponse> getScrumMasters() {
+        return userService.getAllTeamScrumMasters();
+    }
 }
