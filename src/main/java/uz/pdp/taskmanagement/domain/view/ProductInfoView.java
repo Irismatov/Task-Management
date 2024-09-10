@@ -10,12 +10,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ProductInfoView {
+public class ProductInfoView implements ProductView{
     private UUID id;
     private String name;
     private String gitRepo;
     private String description;
-    private UUID ownerId;
-    private UUID  teamId;
+    private String ownerName;
+    private String  teamName;
 }
 

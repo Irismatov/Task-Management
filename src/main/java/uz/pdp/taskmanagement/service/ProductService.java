@@ -4,6 +4,7 @@ package uz.pdp.taskmanagement.service;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uz.pdp.taskmanagement.domain.view.ProductView;
 import uz.pdp.taskmanagement.repository.ProductRepository;
 
 
@@ -18,6 +19,7 @@ import uz.pdp.taskmanagement.entity.ProductEntity;
 import uz.pdp.taskmanagement.entity.UserEntity;
 import uz.pdp.taskmanagement.repository.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -64,13 +66,11 @@ public class ProductService {
     }
 
 
-    public List<ProductInfoView> getAllProducts() {
-            return modelMapper.map(productRepository.findAll(),
-                    new TypeReference<List<ProductInfoView>>() {
-                    }.getType());
+    public List<ProductView> getAllProducts() {
+        return productRepository.getProduct();
     }
 
-    public List<ProductInfoView> getAllProductsWithoutOwner() {
+    public List<ProductView> getAllProductsWithoutOwner() {
         return modelMapper.map(productRepository.findAllByOwnerIsNull(),
                 new TypeReference<List<ProductInfoView>>() {
         }.getType());
