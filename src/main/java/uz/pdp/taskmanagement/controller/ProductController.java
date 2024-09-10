@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.taskmanagement.domain.request.ProductRequest;
 import uz.pdp.taskmanagement.domain.view.ProductInfoView;
+import uz.pdp.taskmanagement.domain.view.ProductView;
 import uz.pdp.taskmanagement.service.ProductService;
 
 import java.util.List;
@@ -26,12 +27,12 @@ public class ProductController {
     }
 
     @GetMapping()
-    private List<ProductInfoView> getProducts() {
+    private List<ProductView> getProducts() {
         return productService.getAllProducts();
     }
 
-    @GetMapping("without-owner")
-    private List<ProductInfoView> getProductsWithoutOwner() {
+    @GetMapping("/without-owner")
+    private List<ProductView> getProductsWithoutOwner() {
         return productService.getAllProductsWithoutOwner();
     }
 
