@@ -67,7 +67,7 @@ public class CompanyService {
 
     public void blockAndUnBlock(UUID id, boolean block){
         CompanyEntity company = findById(id);
-        company.setBlocked(block);
+        company.setIsBlocked(block);
         companyRepository.save(company);
     }
 }
