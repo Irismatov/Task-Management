@@ -59,4 +59,24 @@ public class UserController {
     private List<UserResponse> getAllByRoleAndTeamIsNull() {
         return userService.getAllProductOwnersAndProductIsNull();
     }
+
+    @PostMapping("/save-hr-admin")
+    private UserEntity saveHRAdmin(@RequestBody UserRequest user) {
+        return userService.save(user);
+    }
+
+    @GetMapping("/get-hr-admin")
+    private List<UserResponse> getHRAdmin() {
+        return userService.findByRole(UserRole.HR_ADMIN);
+    }
+
+    @DeleteMapping("/delete-hr-admin/{id}")
+    private void deleteHRAdmin(@PathVariable UUID id) {
+        userService.delete(id);
+    }
+
+    @PostMapping("/add-employee")
+    private UserEntity addEmployee(@RequestBody UserRequest user) {
+        return userService.saveEmployee(user);
+    }
 }

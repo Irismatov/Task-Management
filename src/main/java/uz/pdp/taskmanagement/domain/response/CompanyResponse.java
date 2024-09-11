@@ -18,4 +18,5 @@ public class CompanyResponse {
     private String name;
     private String address;
     private LocalDate establishmentDate;
+    private Boolean isBlocked;
 }

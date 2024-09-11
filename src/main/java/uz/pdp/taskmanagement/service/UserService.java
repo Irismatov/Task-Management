@@ -79,8 +79,17 @@ public class UserService {
         List<UserEntity> teamLead = userRepository.getAllByRoleAndTeamIsNull(UserRole.TEAM_LEAD);
         return  teamLead.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
     }
-
-
+    public UserEntity saveEmployee(UserRequest request) {
+        UserEntity user = UserEntity.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .username(request.getUsername())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(request.getRole())
+                .build();
+        return userRepository.save(user);
+    }
     public List<UserResponse> getAllTeamScrumMasters() {
         List<UserEntity> teamLead = userRepository.getAllByRoleAndTeamIsNull(UserRole.SCRUM_MASTER);
         return  teamLead.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();

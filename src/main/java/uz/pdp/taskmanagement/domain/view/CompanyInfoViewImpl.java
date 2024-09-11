@@ -17,6 +17,6 @@ public class CompanyInfoViewImpl implements CompanyInfoView{
     private String name;
     private String address;
     private LocalDate establishmentDate;
-    boolean isBlocked;
+    private Boolean isBlocked;
     private String ceoUsername;
 }

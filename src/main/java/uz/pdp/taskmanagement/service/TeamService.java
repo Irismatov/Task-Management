@@ -28,13 +28,16 @@ public class TeamService {
 
     public void createTeam(TeamRequest teamRequest) {
         UserEntity user = userService.findById(teamRequest.getLeadId());
+        UserEntity scrumMaster = userService.findById(teamRequest.getScrumMasterId());
 
         TeamEntity build = TeamEntity.builder()
                 .name(teamRequest.getName())
                 .description(teamRequest.getDescription())
                 .lead(user)
+                .scrumMaster(scrumMaster)
                 .build();
 
+        teamRepository.save(build);
         user.setTeam(teamRepository.save(build));
         userService.updateUser(user);
     }
