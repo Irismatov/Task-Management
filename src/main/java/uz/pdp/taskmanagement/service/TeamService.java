@@ -1,6 +1,5 @@
 package uz.pdp.taskmanagement.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,14 +31,16 @@ public class TeamService {
 
 
     public void createTeam(TeamRequest teamRequest) {
-        UserEntity user = userService.findById(teamRequest.getLead());
+        UserEntity lead = userService.findById(teamRequest.getLead());
         UserEntity scrumMaster = userService.findById(teamRequest.getScrumMaster());
+        List<UserEntity> developers = userService.findUserByIds(teamRequest.getDevelopers());
 
         TeamEntity build = TeamEntity.builder()
                 .name(teamRequest.getName())
                 .description(teamRequest.getDescription())
-                .lead(user)
+                .lead(lead)
                 .scrumMaster(scrumMaster)
+                .developer(developers)
                 .build();
 
         teamRepository.save(build);
@@ -68,20 +69,20 @@ public class TeamService {
     public List<TeamResponse> getAll() {
         List<TeamEntity> all = teamRepository.findAll();
 
-        List<TeamResponse> collect = all.stream()
+        return all.stream()
                 .map(teamEntity -> new TeamResponse(
                         teamEntity.getId(),
                         teamEntity.getName(),
                         teamEntity.getDescription(),
                         teamEntity.getLead().getUsername(),
-                        teamEntity.getScrumMaster().getUsername()
+                        teamEntity.getScrumMaster().getUsername(),
+                        teamEntity.getDeveloper().stream().map(UserEntity::getUsername).toList()
                 ))
                 .collect(Collectors.toList());
-        return collect;
     }
 
 
-        public TeamEntity findById(UUID teamId) {
+    public TeamEntity findById(UUID teamId) {
         return teamRepository.findById(teamId)
                 .orElseThrow(() -> new BaseException("Team not found"));
     }

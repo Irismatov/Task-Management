@@ -20,4 +20,8 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
     List<UserEntity> getAllByRoleAndTeamIsNull(UserRole role);
 
+    List<UserEntity> getAllByRoleAndProductIsNull(UserRole role);
+
+    List<UserEntity> findByIdIn(List<UUID> ids);
+
 }
