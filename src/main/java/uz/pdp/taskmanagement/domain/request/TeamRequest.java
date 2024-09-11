@@ -16,6 +16,6 @@ public class TeamRequest {
     @Column(unique=true)
     private String name;
     private String description;
-    private UUID leadId;
-    private UUID scrumMasterId;
+    private UUID lead;
+    private UUID scrumMaster;
 }
