@@ -54,6 +54,11 @@ public class UserController {
         return userService.getAllTeamScrumMasters();
     }
 
+    @GetMapping("/developer")
+    private List<UserResponse> getDevelopers() {
+        return userService.getAllDevelopers();
+    }
+
     @PostMapping("/save-hr-admin")
     private UserEntity saveHRAdmin(@RequestBody UserRequest user) {
         return userService.save(user);
