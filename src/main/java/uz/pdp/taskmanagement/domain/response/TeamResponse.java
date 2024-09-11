@@ -15,4 +15,6 @@ public class TeamResponse {
     private UUID id;
     private String name;
     private String description;
+    private String lead;
+    private String scrumMaster;
 }

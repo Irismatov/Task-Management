@@ -6,10 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import uz.pdp.taskmanagement.domain.JwtResponse;
+import uz.pdp.taskmanagement.domain.response.LoginResponse;
 import uz.pdp.taskmanagement.domain.request.LoginRequest;
-import uz.pdp.taskmanagement.domain.request.UserRequest;
-import uz.pdp.taskmanagement.entity.UserEntity;
 import uz.pdp.taskmanagement.service.AuthService;
 import uz.pdp.taskmanagement.service.UserService;
 
@@ -23,7 +21,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public JwtResponse login(@RequestBody LoginRequest login) {
+    public LoginResponse login(@RequestBody LoginRequest login) {
         return authService.login(login.getUsername(), login.getPassword());
     }
 

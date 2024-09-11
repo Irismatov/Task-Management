@@ -79,4 +79,17 @@ public class UserController {
     private UserEntity addEmployee(@RequestBody UserRequest user) {
         return userService.saveEmployee(user);
     }
+
+
+    @GetMapping("/get-employee")
+    private List<UserResponse> getEmployees() {
+        return userService.findEmployees(List.of(UserRole.TEAM_LEAD, UserRole.SCRUM_MASTER, UserRole.DEVELOPER));
+    }
+
+    @DeleteMapping("/delete-employee/{id}")
+    private void deleteEmployee(@PathVariable("id") UUID id) {
+        userService.delete(id);
+    }
+
+
 }

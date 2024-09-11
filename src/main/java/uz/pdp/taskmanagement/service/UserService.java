@@ -19,7 +19,6 @@ import uz.pdp.taskmanagement.entity.enumerators.UserRole;
 import uz.pdp.taskmanagement.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -35,7 +34,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public UserEntity findByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() ->  new UsernameNotFoundException("user with this username not found"));
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("user with this username not found"));
     }
 
     public UserEntity save(UserRequest request) {
@@ -77,8 +76,9 @@ public class UserService {
 
     public List<UserResponse> getAllTeamLeads() {
         List<UserEntity> teamLead = userRepository.getAllByRoleAndTeamIsNull(UserRole.TEAM_LEAD);
-        return  teamLead.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
+        return teamLead.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
     }
+
     public UserEntity saveEmployee(UserRequest request) {
         UserEntity user = UserEntity.builder()
                 .firstName(request.getFirstName())
@@ -87,12 +87,19 @@ public class UserService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
+                .permissions(request.getPermissions())
                 .build();
         return userRepository.save(user);
     }
+
     public List<UserResponse> getAllTeamScrumMasters() {
         List<UserEntity> teamLead = userRepository.getAllByRoleAndTeamIsNull(UserRole.SCRUM_MASTER);
-        return  teamLead.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
+        return teamLead.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
+    }
+
+    public List<UserResponse> findEmployees(List<UserRole> employees) {
+        return userRepository.findByRoleIn(employees)
+                .stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
     }
 
 
