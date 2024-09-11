@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -17,4 +18,5 @@ public class TeamResponse {
     private String description;
     private String lead;
     private String scrumMaster;
+    private List<String> developerName;
 }

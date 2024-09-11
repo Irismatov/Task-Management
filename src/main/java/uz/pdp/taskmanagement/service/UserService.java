@@ -96,4 +96,13 @@ public class UserService {
         return userRepository.findByRoleIn(employees)
                 .stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
     }
+
+    public List<UserResponse> getAllDevelopers() {
+        List<UserEntity> developer = userRepository.getAllByRoleAndTeamIsNull(UserRole.DEVELOPER);
+        return developer.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
+    }
+
+    public List<UserEntity> findUserByIds(List<UUID> developers) {
+        return userRepository.findByIdIn(developers);
+    }
 }
