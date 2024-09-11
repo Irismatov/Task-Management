@@ -92,4 +92,10 @@ public class UserController {
     }
 
 
+
+    @GetMapping("/get-product-owner")
+    private List<UserResponse> getProductOwner() {
+        return userService.findByRole(UserRole.PRODUCT_OWNER);
+    }
+
 }
