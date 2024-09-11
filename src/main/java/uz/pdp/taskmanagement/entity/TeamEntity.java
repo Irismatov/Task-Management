@@ -2,10 +2,7 @@ package uz.pdp.taskmanagement.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -24,6 +21,8 @@ public class TeamEntity extends BaseEntity{
     private UserEntity lead;
     @OneToOne
     private UserEntity scrumMaster;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<UserEntity> developer;
     @OneToMany
     @JsonIgnore
     private List<ProductEntity> products;

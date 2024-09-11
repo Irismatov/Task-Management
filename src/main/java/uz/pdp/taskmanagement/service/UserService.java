@@ -102,6 +102,15 @@ public class UserService {
                 .stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
     }
 
+    public List<UserResponse> getAllDevelopers() {
+        List<UserEntity> developer = userRepository.getAllByRoleAndTeamIsNull(UserRole.DEVELOPER);
+        return developer.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
+    }
+
+    public List<UserEntity> findUserByIds(List<UUID> developers) {
+        return userRepository.findByIdIn(developers);
+    }
+
 
     public List<UserResponse> getAllProductOwnersAndProductIsNull(){
         List<UserEntity> list = userRepository.getAllByRoleAndProductIsNull(UserRole.PRODUCT_OWNER);

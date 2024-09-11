@@ -49,10 +49,14 @@ public class UserController {
         return userService.getAllTeamLeads();
     }
 
-
     @GetMapping("/scrum-master")
     private List<UserResponse> getScrumMasters() {
         return userService.getAllTeamScrumMasters();
+    }
+
+    @GetMapping("/developer")
+    private List<UserResponse> getDevelopers() {
+        return userService.getAllDevelopers();
     }
 
     @GetMapping("/getAllProductOwnersAndProductIsNull")
