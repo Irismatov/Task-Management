@@ -27,16 +27,17 @@ public class TeamService {
 
 
     public void createTeam(TeamRequest teamRequest) {
-        UserEntity user = userService.findById(teamRequest.getLeadId());
+//        UserEntity user = userService.findById(teamRequest.getLeadId());
 
         TeamEntity build = TeamEntity.builder()
                 .name(teamRequest.getName())
                 .description(teamRequest.getDescription())
-                .lead(user)
+                .lead(userService.findById(teamRequest.getLeadId()))
                 .build();
 
-        user.setTeam(teamRepository.save(build));
-        userService.updateUser(user);
+        teamRepository.save(build);
+//        user.setTeam(teamRepository.save(build));
+//        userService.updateUser(user);
     }
 
     public void deleteTeam(UUID teamId) {

@@ -17,25 +17,24 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
-    @PostMapping
+    @PostMapping("/save-team")
     private ResponseEntity<Void> saveTeam(@RequestBody TeamRequest teamRequest) {
         teamService.createTeam(teamRequest);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/get-team")
     private List<TeamResponse> getAllTeams() {
         return teamService.getAll();
     }
 
-    //htttp ... ./team/i3jfklejfklsdjfsjflkfwlkfj324
-    @DeleteMapping("/{teamId}")
+    @DeleteMapping("delete-team/{teamId}")
     private ResponseEntity<Void> deleteTeamById(@PathVariable("teamId") UUID teamId) {
         teamService.deleteTeam(teamId);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{teamId}")
+    @PutMapping("/update-team/{teamId}")
     private ResponseEntity<Void> updateTeam(@PathVariable("teamId") UUID id,
                                             @RequestBody TeamRequest teamRequest) {
         teamService.update(id, teamRequest);
