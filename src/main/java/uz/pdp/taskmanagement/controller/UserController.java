@@ -59,6 +59,11 @@ public class UserController {
         return userService.getAllDevelopers();
     }
 
+    @GetMapping("/getAllProductOwnersAndProductIsNull")
+    private List<UserResponse> getAllByRoleAndTeamIsNull() {
+        return userService.getAllProductOwnersAndProductIsNull();
+    }
+
     @PostMapping("/save-hr-admin")
     private UserEntity saveHRAdmin(@RequestBody UserRequest user) {
         return userService.save(user);
@@ -90,5 +95,11 @@ public class UserController {
         userService.delete(id);
     }
 
+
+
+    @GetMapping("/get-product-owner")
+    private List<UserResponse> getProductOwner() {
+        return userService.findByRole(UserRole.PRODUCT_OWNER);
+    }
 
 }

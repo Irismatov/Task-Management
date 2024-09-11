@@ -34,6 +34,9 @@ public class UserEntity extends BaseEntity {
     @ManyToOne
     private CompanyEntity company;
 
+    @OneToOne
+    private ProductEntity product;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
 

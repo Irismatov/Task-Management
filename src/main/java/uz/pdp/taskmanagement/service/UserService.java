@@ -3,6 +3,11 @@ package uz.pdp.taskmanagement.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -105,4 +110,11 @@ public class UserService {
     public List<UserEntity> findUserByIds(List<UUID> developers) {
         return userRepository.findByIdIn(developers);
     }
+
+
+    public List<UserResponse> getAllProductOwnersAndProductIsNull(){
+        List<UserEntity> list = userRepository.getAllByRoleAndProductIsNull(UserRole.PRODUCT_OWNER);
+        return  list.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
+    }
+
 }
