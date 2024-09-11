@@ -1,11 +1,13 @@
 package uz.pdp.taskmanagement.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.domain.request.TaskRequest;
 import uz.pdp.taskmanagement.domain.response.TaskResponse;
 import uz.pdp.taskmanagement.entity.TaskEntity;
+import uz.pdp.taskmanagement.entity.UserEntity;
 import uz.pdp.taskmanagement.repository.TaskRepository;
 
 import java.util.List;
@@ -46,5 +48,13 @@ public class TaskService {
 
     public void deleteTask(UUID taskId) {
         taskRepository.deleteById(taskId);
+    }
+
+    public List<TaskResponse> getAllTasksForTeamLead(UserEntity teamLead) {
+        return getAllTasksByTeamId(teamLead.getTeam().getId());
+    }
+
+    List<TaskResponse> getAllTasksByTeamId(UUID teamId) {
+        return modelMapper.map(taskRepository.getAllTasksByTeamId(teamId), new TypeReference<List<TaskResponse>>(){}.getType());
     }
 }
