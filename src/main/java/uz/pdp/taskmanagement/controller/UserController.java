@@ -68,4 +68,9 @@ public class UserController {
     private void deleteHRAdmin(@PathVariable UUID id) {
         userService.delete(id);
     }
+
+    @PostMapping("/add-employee")
+    private UserEntity addEmployee(@RequestBody UserRequest user) {
+        return userService.saveEmployee(user);
+    }
 }

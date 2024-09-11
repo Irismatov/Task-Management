@@ -20,6 +20,7 @@ public class TeamController {
     @PostMapping("/save-team")
     private ResponseEntity<Void> saveTeam(@RequestBody TeamRequest teamRequest) {
         teamService.createTeam(teamRequest);
+
         return ResponseEntity.ok().build();
     }
 
