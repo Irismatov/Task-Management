@@ -5,9 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import uz.pdp.taskmanagement.domain.JwtResponse;
+import uz.pdp.taskmanagement.domain.response.LoginResponse;
 import uz.pdp.taskmanagement.entity.UserEntity;
-import uz.pdp.taskmanagement.entity.enumerators.Permission;
 import uz.pdp.taskmanagement.entity.enumerators.UserRole;
 import uz.pdp.taskmanagement.repository.UserRepository;
 
@@ -25,10 +24,14 @@ public class AuthService {
     @Autowired
     private UserRepository userRepository;
 
-    public JwtResponse login(String username, String password) {
+    public LoginResponse login(String username, String password) {
         UserEntity user = userService.findByUsername(username);
         if (passwordEncoder.matches(password, user.getPassword())) {
-            return new JwtResponse(jwtService.generateToken(user));
+            return LoginResponse.builder()
+                    .token(jwtService.generateToken(user))
+                    .role(user.getRole())
+                    .permissions(user.getPermissions())
+                    .build();
         }
         throw new UsernameNotFoundException("Invalid username or password");
     }
