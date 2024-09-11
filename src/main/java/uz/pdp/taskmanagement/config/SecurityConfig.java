@@ -29,8 +29,7 @@ public class SecurityConfig {
                             .requestMatchers("/features").hasRole("PRODUCT_OWNER")
 //                            .requestMatchers("/company/**").hasRole("PROJECT_ADMINISTRATOR")
                             .requestMatchers("/user/CEO").hasRole("PROJECT_ADMINISTRATOR")
-                            .requestMatchers("/product/**").hasRole("CEO")
-                            .requestMatchers("/sprint/**").hasRole("CEO")
+                            .requestMatchers("/product","/product/**", "/users/getAllProductOwnersAndProductIsNull", "/team/get-team", "/sprint/**").hasRole("CEO")
                             .requestMatchers("/team/save-team", "/team/", "team/update-team/", "team/delete-team/", "/team/get-team").hasRole("HR_ADMIN")
                             .requestMatchers("users/save-hr-admin", "users/get-hr-admin", "users/delete-hr-admin/").hasRole("CEO")
 
