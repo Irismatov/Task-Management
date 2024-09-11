@@ -49,9 +49,23 @@ public class UserController {
         return userService.getAllTeamLeads();
     }
 
-
     @GetMapping("/scrum-master")
     private List<UserResponse> getScrumMasters() {
         return userService.getAllTeamScrumMasters();
+    }
+
+    @PostMapping("/save-hr-admin")
+    private UserEntity saveHRAdmin(@RequestBody UserRequest user) {
+        return userService.save(user);
+    }
+
+    @GetMapping("/get-hr-admin")
+    private List<UserResponse> getHRAdmin() {
+        return userService.findByRole(UserRole.HR_ADMIN);
+    }
+
+    @DeleteMapping("/delete-hr-admin/{id}")
+    private void deleteHRAdmin(@PathVariable UUID id) {
+        userService.delete(id);
     }
 }

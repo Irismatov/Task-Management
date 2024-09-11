@@ -31,7 +31,8 @@ public class SecurityConfig {
                             .requestMatchers("/user/CEO").hasRole("PROJECT_ADMINISTRATOR")
                             .requestMatchers("/product/**").hasRole("CEO")
                             .requestMatchers("/sprint/**").hasRole("CEO")
-                            .requestMatchers("/team/**").hasRole("CEO")
+                            .requestMatchers("/team/save-team", "/team/", "team/update-team/", "team/delete-team/", "/team/get-team").hasRole("HR_ADMIN")
+                            .requestMatchers("users/save-hr-admin", "users/get-hr-admin", "users/delete-hr-admin/").hasRole("CEO")
 
                             .anyRequest().authenticated();
 

@@ -80,8 +80,4 @@ public class UserService {
         List<UserEntity> teamLead = userRepository.getAllByRoleAndTeamIsNull(UserRole.SCRUM_MASTER);
         return  teamLead.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
     }
-
-
-
-
 }
