@@ -13,6 +13,7 @@ import uz.pdp.taskmanagement.repository.TeamRepository;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class TeamService {
@@ -27,8 +28,8 @@ public class TeamService {
 
 
     public void createTeam(TeamRequest teamRequest) {
-        UserEntity user = userService.findById(teamRequest.getLeadId());
-        UserEntity scrumMaster = userService.findById(teamRequest.getScrumMasterId());
+        UserEntity user = userService.findById(teamRequest.getLead());
+        UserEntity scrumMaster = userService.findById(teamRequest.getScrumMaster());
 
         TeamEntity build = TeamEntity.builder()
                 .name(teamRequest.getName())
@@ -38,12 +39,10 @@ public class TeamService {
                 .build();
 
         teamRepository.save(build);
-        user.setTeam(teamRepository.save(build));
-        userService.updateUser(user);
     }
 
     public void deleteTeam(UUID teamId) {
-         UserEntity lead = findById(teamId).getLead();
+        UserEntity lead = findById(teamId).getLead();
         lead.setTeam(null);
         userService.updateUser(lead);
 
@@ -63,12 +62,22 @@ public class TeamService {
     }
 
     public List<TeamResponse> getAll() {
-        return modelMapper.map(teamRepository.findAll(),
-                new TypeReference<List<TeamResponse>>() {
-        }.getType());
+        List<TeamEntity> all = teamRepository.findAll();
+
+        List<TeamResponse> collect = all.stream()
+                .map(teamEntity -> new TeamResponse(
+                        teamEntity.getId(),
+                        teamEntity.getName(),
+                        teamEntity.getDescription(),
+                        teamEntity.getLead().getUsername(),
+                        teamEntity.getScrumMaster().getUsername()
+                ))
+                .collect(Collectors.toList());
+        return collect;
     }
 
-    public TeamEntity findById(UUID teamId) {
+
+        public TeamEntity findById(UUID teamId) {
         return teamRepository.findById(teamId)
                 .orElseThrow(() -> new BaseException("Team not found"));
     }
