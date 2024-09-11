@@ -27,6 +27,9 @@ public class JwtService {
     @Autowired
     GlobalExceptionHandler globalExceptionHandler;
 
+    @Autowired
+    private UserService userService;
+
     public String generateToken(UserEntity user) {
         return Jwts.builder()
                 .signWith(Keys.hmacShaKeyFor(key.getBytes()))
@@ -52,5 +55,13 @@ public class JwtService {
         } catch (ExpiredJwtException e) {
             throw new ExpiredTokenException(e.getMessage());
         }
+    }
+
+    public UserEntity getUserFromToken(String token) {
+        String username = Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(key.getBytes()))
+                .build()
+                .parseSignedClaims(token.substring(7)).getPayload().getSubject();
+        return userService.findByUsername(username);
     }
 }
