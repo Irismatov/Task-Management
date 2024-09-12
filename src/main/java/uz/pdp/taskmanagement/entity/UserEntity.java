@@ -1,6 +1,7 @@
 package uz.pdp.taskmanagement.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,10 +32,13 @@ public class UserEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "team_id")
     private TeamEntity team;
+
     @ManyToOne
+    @JsonIgnore
     private CompanyEntity company;
 
     @OneToOne
+    @JsonIgnore
     private ProductEntity product;
 
     @Enumerated(EnumType.STRING)
