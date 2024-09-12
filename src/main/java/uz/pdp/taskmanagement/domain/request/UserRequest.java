@@ -7,10 +7,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+import uz.pdp.taskmanagement.entity.CompanyEntity;
 import uz.pdp.taskmanagement.entity.enumerators.Permission;
 import uz.pdp.taskmanagement.entity.enumerators.UserRole;
 
 import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +25,7 @@ public class UserRequest {
     @NotBlank
     @Length(min = 3, max = 20)
     private String password;
+    private UUID companyId;
     private String firstName;
     private String lastName;
     private String email;
