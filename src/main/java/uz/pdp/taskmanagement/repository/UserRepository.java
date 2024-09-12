@@ -2,6 +2,7 @@ package uz.pdp.taskmanagement.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import uz.pdp.taskmanagement.entity.CompanyEntity;
 import uz.pdp.taskmanagement.entity.UserEntity;
 import uz.pdp.taskmanagement.entity.enumerators.UserRole;
 
@@ -16,7 +17,7 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
     List<UserEntity> findByRole(UserRole role);
 
-    List<UserEntity> findByRoleIn(List<UserRole> roles);
+    List<UserEntity> findByRoleInAndCompany(List<UserRole> roles, CompanyEntity company);
 
     List<UserEntity> getAllByRoleAndTeamIsNull(UserRole role);
 

@@ -97,8 +97,8 @@ public class UserService {
         return teamLead.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
     }
 
-    public List<UserResponse> findEmployees(List<UserRole> employees) {
-        return userRepository.findByRoleIn(employees)
+    public List<UserResponse> findEmployees(List<UserRole> employees, CompanyEntity company) {
+        return userRepository.findByRoleInAndCompany(employees, company)
                 .stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
     }
 
