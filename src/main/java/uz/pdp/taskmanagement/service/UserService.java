@@ -3,6 +3,7 @@ package uz.pdp.taskmanagement.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +20,7 @@ import uz.pdp.taskmanagement.entity.enumerators.UserRole;
 import uz.pdp.taskmanagement.repository.UserRepository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -33,12 +35,19 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    @Lazy
+    private CompanyService companyService;
+
     public UserEntity findByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("user with this username not found"));
     }
 
     public UserEntity save(UserRequest request) {
         UserEntity entity = modelMapper.map(request, UserEntity.class);
+        if (Objects.nonNull(request.getCompanyId())) {
+            entity.setCompany(companyService.findById(request.getCompanyId()));
+        }
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
         return userRepository.save(entity);
     }
@@ -72,6 +81,11 @@ public class UserService {
     public List<UserResponse> findByRole(UserRole userRole) {
         List<UserEntity> byRole = userRepository.findByRole(userRole);
         return byRole.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
+    }
+
+    public List<UserResponse> getHrAdminsOfCompany(CompanyEntity company) {
+        List<UserEntity> users = userRepository.findByCompanyAndRole(company, UserRole.HR_ADMIN);
+        return users.stream().map(user -> modelMapper.map(user, UserResponse.class)).toList();
     }
 
     public List<UserResponse> getAllTeamLeads() {

@@ -7,6 +7,7 @@ import uz.pdp.taskmanagement.domain.request.UserRequest;
 import uz.pdp.taskmanagement.domain.response.UserResponse;
 import uz.pdp.taskmanagement.entity.UserEntity;
 import uz.pdp.taskmanagement.entity.enumerators.UserRole;
+import uz.pdp.taskmanagement.service.JwtService;
 import uz.pdp.taskmanagement.service.UserService;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JwtService jwtService;
 
     @PostMapping()
     private UserEntity save(@RequestBody UserRequest user){
@@ -65,13 +69,16 @@ public class UserController {
     }
 
     @PostMapping("/save-hr-admin")
-    private UserEntity saveHRAdmin(@RequestBody UserRequest user) {
+    private UserEntity saveHRAdmin(@RequestBody UserRequest user, @RequestHeader("authorization") String token) {
+        UserEntity userFromToken = jwtService.getUserFromToken(token);
+        user.setCompanyId(userFromToken.getCompany().getId());
         return userService.save(user);
     }
 
     @GetMapping("/get-hr-admin")
-    private List<UserResponse> getHRAdmin() {
-        return userService.findByRole(UserRole.HR_ADMIN);
+    private List<UserResponse> getHRAdmin(@RequestHeader("authorization") String token) {
+        UserEntity userFromToken = jwtService.getUserFromToken(token);
+        return userService.getHrAdminsOfCompany(userFromToken.getCompany());
     }
 
     @DeleteMapping("/delete-hr-admin/{id}")

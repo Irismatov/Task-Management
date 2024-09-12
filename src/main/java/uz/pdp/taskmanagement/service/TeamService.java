@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.taskmanagement.controller.exception.BaseException;
 import uz.pdp.taskmanagement.domain.request.TeamRequest;
+import uz.pdp.taskmanagement.domain.response.TaskResponse;
 import uz.pdp.taskmanagement.entity.TeamEntity;
 import uz.pdp.taskmanagement.domain.response.TeamResponse;
 import uz.pdp.taskmanagement.entity.UserEntity;
+import uz.pdp.taskmanagement.repository.TaskRepository;
 import uz.pdp.taskmanagement.repository.TeamRepository;
 
 import java.util.List;
@@ -24,6 +26,8 @@ public class TeamService {
     private ModelMapper modelMapper;
     @Autowired
     private UserService userService;
+    @Autowired
+    private TaskRepository taskRepository;
 
 
     public void createTeam(TeamRequest teamRequest) {

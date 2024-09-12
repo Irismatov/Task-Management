@@ -36,6 +36,9 @@ public class SecurityConfig {
                                     "/sprint/**",
                                     "/users/get-product-owner"
                             ).hasRole("CEO")
+                            .requestMatchers("/product/**").hasRole("CEO")
+                            .requestMatchers("/sprint/**").hasRole("CEO")
+                            .requestMatchers("/tasks/team-lead").hasRole("TEAM_LEAD")
                             .requestMatchers("/team/save-team", "/team/", "team/update-team/", "team/delete-team/", "/team/get-team").hasRole("HR_ADMIN")
                             .requestMatchers("users/save-hr-admin", "users/get-hr-admin", "users/delete-hr-admin/").hasRole("CEO")
 
