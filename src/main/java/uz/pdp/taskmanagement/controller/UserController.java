@@ -93,8 +93,9 @@ public class UserController {
 
 
     @GetMapping("/get-employee")
-    private List<UserResponse> getEmployees() {
-        return userService.findEmployees(List.of(UserRole.TEAM_LEAD, UserRole.SCRUM_MASTER, UserRole.DEVELOPER));
+    private List<UserResponse> getEmployees(@RequestHeader("authorization") String token) {
+        UserEntity userFromToken = jwtService.getUserFromToken(token);
+        return userService.findEmployees(List.of(UserRole.TEAM_LEAD, UserRole.SCRUM_MASTER, UserRole.DEVELOPER), userFromToken.getCompany());
     }
 
     @DeleteMapping("/delete-employee/{id}")
