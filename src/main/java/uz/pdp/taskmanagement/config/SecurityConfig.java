@@ -12,7 +12,7 @@ import uz.pdp.taskmanagement.filter.JwtFilter;
 
 @Configuration
 public class SecurityConfig {
-    private final String[] WHITE_LIST = {"/company", "/company/**", "/register", "/login", "/", "/register-pa"};
+    private final String[] WHITE_LIST = {"/users", "/users/**", "/register", "/login", "/", "/register-pa"};
 
     @Autowired
     private JwtFilter jwtFilter;
@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((configurer) -> {
                     configurer
                             .requestMatchers(WHITE_LIST).permitAll()
-                            .requestMatchers("/user").hasRole("CEO")
+                            .requestMatchers("/users").hasRole("CEO")
 
                             .requestMatchers("/features").hasRole("PRODUCT_OWNER")
 //                            .requestMatchers("/company/**").hasRole("PROJECT_ADMINISTRATOR")

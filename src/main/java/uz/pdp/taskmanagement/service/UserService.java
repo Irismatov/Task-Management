@@ -62,10 +62,27 @@ public class UserService {
 
     public UserEntity update(UUID id, UserRequest request) {
         UserEntity entity = findById(id);
-        UserEntity update = modelMapper.map(request, UserEntity.class);
-        update.setId(id);
-        update.setPassword(entity.getPassword());
-        return userRepository.save(update);
+        if (Objects.nonNull(request.getEmail())) {
+            entity.setEmail(request.getEmail());
+        }
+
+        if (Objects.nonNull(request.getPassword())) {
+            entity.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
+
+        if (Objects.nonNull(request.getFirstName())) {
+            entity.setFirstName(request.getFirstName());
+        }
+
+        if (Objects.nonNull(request.getLastName())) {
+            entity.setLastName(request.getLastName());
+        }
+
+        if (Objects.nonNull(request.getCompanyId())) {
+            entity.setCompany(companyService.findById(request.getCompanyId()));
+        }
+
+        return userRepository.save(entity);
     }
 
 
